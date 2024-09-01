@@ -15,13 +15,13 @@ Apache Airflow is a platform to programmatically author, schedule, and monitor w
 |
 ├── .gitignore                  <-- Git Ignore Configuration
 |
-├── .pre-commit-config.yaml     <-- Pre-Commit Hooks Configuration
+├── .pre-commit-config.yaml     <-- Pre-Commit Configuration
 |
 ├── docker-compose.yaml         <-- Docker Compose Configuration
 |
-├── README.md                   <-- Project Overview and Setup Instructions
+├── README.md                   <-- You Are Here
 |
-├── requirements.txt            <-- Python Package Requirements
+├── requirements.txt            <-- Package Requirements
 ```
 
 ### Installation
