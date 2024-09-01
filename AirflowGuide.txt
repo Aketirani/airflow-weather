@@ -1,0 +1,16 @@
+Airflow Notes
+
+# YouTube Install Guide: https://www.youtube.com/watch?v=Fl64Y0p7rls
+# Airflow Host: http://localhost:8080/home
+
+# Docker
+docker-compose up -d    # Build Image
+docker-compose down     # Stop & Remove Containers
+docker-compose restart  # Restart All Services
+docker-compose ps       # Service Status
+
+# List DAGs
+docker-compose run airflow-cli airflow dags list
+
+# Create Admin User
+docker-compose run airflow-worker airflow users create --role Admin --username admin --email admin --firstname admin --lastname admin --password admin
