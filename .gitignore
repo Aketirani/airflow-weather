@@ -108,3 +108,6 @@ ENV/
 
 # Logs
 logs/
+
+# API Key
+api_key.py
