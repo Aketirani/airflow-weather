@@ -1,8 +1,8 @@
-# Airflow DAGs Project
-This project demonstrates the use of Apache Airflow for orchestrating workflows. It includes an example DAG to showcase Airflow functionalities and serves as an example of how to set up and manage tasks with Airflow.
+# Weather Data Pipeline with Apache Airflow
+Apache Airflow is a platform designed to manage and automate complex workflows through programmatic scheduling and monitoring. It empowers users to define workflows as Directed Acyclic Graphs (DAGs), which represent a series of tasks and their dependencies. Each DAG outlines the sequence in which tasks are executed, ensuring that they run in the correct order and adhere to specified dependencies.
 
 ### Project Overview
-Apache Airflow is a platform to programmatically author, schedule, and monitor workflows. This project includes an example DAG that retrieves and processes weather data from the OpenWeatherMap API. It’s designed to help you understand how to set up and manage tasks within Airflow.
+This project showcases the use of Apache Airflow to orchestrate an ETL (Extract, Transform, Load) pipeline focused on weather data. It provides a practical example of how Airflow can be employed to automate the retrieval of weather information from the OpenWeatherMap API, process and transform the data, and present it in a structured format.
 
 ### Structure
 ```
@@ -28,31 +28,33 @@ Apache Airflow is a platform to programmatically author, schedule, and monitor w
 ```
 
 ### Installation
-To get started with this project, ensure that you have Docker installed on your system. Follow the official [Docker installation guide](https://docs.docker.com/get-docker/) and [Docker Compose installation guide](https://docs.docker.com/compose/install/) for help with the installation process. You can also watch [Install Apache Airflow](https://www.youtube.com/watch?v=Fl64Y0p7rls).
+To set up this project, follow these steps:
 
-Clone the repository to your local machine and navigate to the project's root directory to access all the necessary files and scripts.
+1. **Install Docker and Docker Compose:**
+   - Follow the official [Docker installation guide](https://docs.docker.com/get-docker/) and [Docker Compose installation guide](https://docs.docker.com/compose/install/).
+   - You can also watch [Install Apache Airflow](https://www.youtube.com/watch?v=Fl64Y0p7rls).
 
-### Requirement for Weather Data DAG
+2. **Clone the Repository:**
+   - Clone this repository to your local machine:
+     ```bash
+     git clone https://github.com/yourusername/airflow-weather.git
+     cd airflow-weather
+     ```
 
-To enable the Weather Data DAG to function correctly, you'll need an API key from [OpenWeatherMap](https://openweathermap.org/api).
-
-Follow these steps to configure your environment:
-
-1. **Obtain an API Key**:
-   - Visit [OpenWeatherMap](https://openweathermap.org/api) and sign up for an API key.
-
-2. **Set Up API Key in Your Project**:
-   - In the root directory of your project, create a folder named `api`.
-   - Inside the `api` folder, create a Python file named `api_key.py`.
-
-3. **Add Your API Key**:
-   - Open the `api_key.py` file and add the following code:
+3. **Configure API Key:**
+   - Obtain an API key from [OpenWeatherMap](https://openweathermap.org/api).
+   - Create a folder named `api` in the project root.
+   - Inside the `api` folder, create a file named `api_key.py` with the following content:
      ```python
      API_KEY = "your_openweathermap_api_key_here"
      ```
-   - Replace `"your_openweathermap_api_key_here"` with the actual API key you obtained from OpenWeatherMap.
 
-This setup will ensure that your Weather Data DAG can securely access the API key needed for its operations.
+4. **Start the Airflow Cluster:**
+   - Run the following commands to start the Airflow services using Docker Compose:
+     ```bash
+     docker-compose build
+     docker-compose up
+     ```
 
 ### Conclusion
 This project provides a foundational example of using Apache Airflow for workflow orchestration. It demonstrates basic DAG creation and task management, serving as a starting point for more complex workflows.
