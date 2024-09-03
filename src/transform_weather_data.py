@@ -14,30 +14,6 @@ class WeatherTransformer:
         """
         pass
 
-    def transform(self, extracted_data: dict) -> dict:
-        """
-        Transforms the weather data by converting API times to local time and adding date and time information
-
-        :param extracted_data: dict, the extracted weather data from the API
-        :return: dict, transformed weather data with added date and time information
-        """
-        timezone_offset = extracted_data["timezone"]
-        offset_hours, offset_minutes = self._calculate_timezone_offset(timezone_offset)
-        timezone = pytz.FixedOffset(offset_hours * 60 + offset_minutes)
-
-        extracted_data["sunrise"] = self._convert_to_local_time(
-            extracted_data["sunrise"], timezone
-        ).strftime("%H:%M:%S")
-        extracted_data["sunset"] = self._convert_to_local_time(
-            extracted_data["sunset"], timezone
-        ).strftime("%H:%M:%S")
-        extracted_data["timezone"] = self._format_timezone(offset_hours, offset_minutes)
-        extracted_data["datetime"] = self._get_formatted_datetime(offset_hours)
-
-        # Print the transformed data
-        print("TRANSFORMED DATA:", extracted_data)
-        return extracted_data
-
     def _calculate_timezone_offset(self, timezone_offset: int) -> tuple:
         """
         Calculate the timezone offset in hours and minutes
@@ -82,3 +58,26 @@ class WeatherTransformer:
         current_time = datetime.now()
         adjusted_time = current_time + timedelta(hours=offset_hours)
         return adjusted_time.strftime("%Y-%m-%d %H:%M:%S")
+
+    def transform(self, extracted_data: dict) -> dict:
+        """
+        Transforms the weather data by converting API times to local time and adding date and time information
+
+        :param extracted_data: dict, the extracted weather data from the API
+        :return: dict, transformed weather data with added date and time information
+        """
+        timezone_offset = extracted_data["timezone"]
+        offset_hours, offset_minutes = self._calculate_timezone_offset(timezone_offset)
+        timezone = pytz.FixedOffset(offset_hours * 60 + offset_minutes)
+
+        extracted_data["sunrise"] = self._convert_to_local_time(
+            extracted_data["sunrise"], timezone
+        ).strftime("%H:%M:%S")
+        extracted_data["sunset"] = self._convert_to_local_time(
+            extracted_data["sunset"], timezone
+        ).strftime("%H:%M:%S")
+        extracted_data["timezone"] = self._format_timezone(offset_hours, offset_minutes)
+        extracted_data["datetime"] = self._get_formatted_datetime(offset_hours)
+
+        print("TRANSFORMED DATA:", extracted_data)
+        return extracted_data

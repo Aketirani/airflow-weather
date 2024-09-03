@@ -18,18 +18,6 @@ class WeatherExtractor:
         self.lat = lat
         self.lon = lon
 
-    def extract(self) -> dict:
-        """
-        Extracts the current weather information using the OpenWeatherMap API
-
-        :return: dict, extracted weather data
-        """
-        response = self._fetch_weather_data()
-        weather_data = response.json()
-        extracted_data = self._parse_weather_data(weather_data)
-        print("EXTRACTED DATA:", extracted_data)
-        return extracted_data
-
     def _fetch_weather_data(self) -> requests.Response:
         """
         Fetches the weather data from the OpenWeatherMap API
@@ -63,3 +51,15 @@ class WeatherExtractor:
             "sunset": weather_data["sys"]["sunset"],
             "timezone": weather_data["timezone"],
         }
+
+    def extract(self) -> dict:
+        """
+        Extracts the current weather information using the OpenWeatherMap API
+
+        :return: dict, extracted weather data
+        """
+        response = self._fetch_weather_data()
+        weather_data = response.json()
+        extracted_data = self._parse_weather_data(weather_data)
+        print("EXTRACTED DATA:", extracted_data)
+        return extracted_data

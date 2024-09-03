@@ -12,15 +12,14 @@ class WeatherLoader:
         """
         pass
 
-    def load(self, transformed_data: dict) -> None:
+    def _format_wind_gust(self, wind_gust: str) -> str:
         """
-        Loads the weather data in a table format
+        Formats the wind gust value for display.
 
-        :param transformed_data: dict, the transformed weather data
+        :param wind_gust: str, the wind gust value or 'N/A'
+        :return: str, formatted wind gust value
         """
-        table = self._generate_table(transformed_data)
-        print("LOADED DATA:\n")
-        print(table)
+        return wind_gust if wind_gust != "N/A" else "N/A"
 
     def _generate_table(self, transformed_data: dict) -> str:
         """
@@ -50,11 +49,12 @@ class WeatherLoader:
         ]
         return tabulate(rows, headers=headers, tablefmt="grid")
 
-    def _format_wind_gust(self, wind_gust: str) -> str:
+    def load(self, transformed_data: dict) -> None:
         """
-        Formats the wind gust value for display.
+        Loads the weather data in a table format
 
-        :param wind_gust: str, the wind gust value or 'N/A'
-        :return: str, formatted wind gust value
+        :param transformed_data: dict, the transformed weather data
         """
-        return wind_gust if wind_gust != "N/A" else "N/A"
+        table = self._generate_table(transformed_data)
+        print("LOADED DATA:\n")
+        print(table)
