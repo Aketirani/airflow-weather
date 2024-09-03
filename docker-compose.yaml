@@ -38,11 +38,12 @@ x-airflow-common:
     AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
-    PYTHONPATH: /opt/airflow:/opt/airflow/api:/opt/airflow/src
+    PYTHONPATH: /opt/airflow:/opt/airflow/api:/opt/airflow/data:/opt/airflow/src
   volumes:
     - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/api:/opt/airflow/api
+    - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
     - ${AIRFLOW_PROJ_DIR:-.}/src:/opt/airflow/src
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
@@ -203,8 +204,8 @@ services:
           echo "   https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#before-you-begin"
           echo
         fi
-        mkdir -p /sources/logs /sources/dags /sources/api /sources/src
-        chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,api,src}
+        mkdir -p /sources/logs /sources/dags /sources/api /sources/data /sources/src
+        chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,api,data,src}
         exec /entrypoint airflow version
     environment:
       <<: *airflow-common-env
