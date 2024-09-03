@@ -14,6 +14,9 @@ This project showcases the use of Apache Airflow to orchestrate an ETL (Extract,
 |
 ├── logs                        <-- Logs Folder
 |
+├── src                         <-- Source Folder
+|   └── *.py                    <-- Source Files
+|
 ├── .env                        <-- Environment Variables
 |
 ├── .gitignore                  <-- Git Ignore Configuration
