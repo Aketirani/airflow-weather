@@ -12,6 +12,9 @@ This project showcases the use of Apache Airflow to orchestrate an ETL (Extract,
 ├── dags                        <-- DAGs Folder
 |   └── *.py                    <-- DAGs Files
 |
+├── data                        <-- Data Folder
+|   └── *.csv                   <-- Data Files
+|
 ├── logs                        <-- Logs Folder
 |
 ├── src                         <-- Source Folder

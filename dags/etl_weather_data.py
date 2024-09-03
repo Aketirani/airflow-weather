@@ -49,7 +49,6 @@ class WeatherETL:
             dag=self.dag,
         )
 
-        # Set up task dependencies
         self.extract_task >> self.transform_task >> self.load_task
 
     def _extract_weather(self, **kwargs) -> dict:
@@ -75,7 +74,7 @@ class WeatherETL:
 
     def _load_weather(self, **kwargs) -> None:
         """
-        Load the transformed weather data
+        Load the transformed weather data and write to CSV
 
         :param kwargs: Context dictionary provided by Airflow
         """
@@ -85,13 +84,11 @@ class WeatherETL:
         self.loader.load(transformed_data)
 
 
-# Default arguments for the DAG
 default_args = {
     "start_date": days_ago(1),
     "retries": 1,
 }
 
-# Initialize the DAG
 dag = DAG(
     "etl_weather_data",
     default_args=default_args,
@@ -100,5 +97,4 @@ dag = DAG(
     description="ETL DAG to extract, transform, and load weather information with date and time.",
 )
 
-# Initialize and configure the ETL process
 weather_etl = WeatherETL(dag)
