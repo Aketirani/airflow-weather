@@ -2,22 +2,52 @@ import requests
 
 from api.api_key import API_KEY
 
-# Copenhagen, Denmark coordinates
-LAT = "55.6761"
-LON = "12.5683"
-
 
 class WeatherExtractor:
-    def extract(self):
-        """
-        Extracts the current weather information using the OpenWeatherMap API.
-        """
-        url = f"http://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={API_KEY}&units=metric"
-        response = requests.get(url)
-        weather_data = response.json()
+    """
+    This class is used to extract weather information using the OpenWeatherMap API
+    """
 
-        extracted_data = {
-            "city": "Copenhagen",
+    def __init__(self, lat: str = "55.6761", lon: str = "12.5683") -> None:
+        """
+        Initialize the class with latitude and longitude coordinates
+
+        :param lat: str, latitude for the location
+        :param lon: str, longitude for the location
+        """
+        self.lat = lat
+        self.lon = lon
+
+    def extract(self) -> dict:
+        """
+        Extracts the current weather information using the OpenWeatherMap API
+
+        :return: dict, extracted weather data
+        """
+        response = self._fetch_weather_data()
+        weather_data = response.json()
+        extracted_data = self._parse_weather_data(weather_data)
+        print("EXTRACTED DATA:", extracted_data)
+        return extracted_data
+
+    def _fetch_weather_data(self) -> requests.Response:
+        """
+        Fetches the weather data from the OpenWeatherMap API
+
+        :return: requests.Response, the API response object
+        """
+        url = f"http://api.openweathermap.org/data/2.5/weather?lat={self.lat}&lon={self.lon}&appid={API_KEY}&units=metric"
+        return requests.get(url)
+
+    def _parse_weather_data(self, weather_data: dict) -> dict:
+        """
+        Parses the weather data from the API response
+
+        :param weather_data: dict, the raw weather data from the API
+        :return: dict, parsed weather data
+        """
+        return {
+            "city": weather_data["name"],
             "country": weather_data["sys"]["country"],
             "temperature": weather_data["main"]["temp"],
             "feels_like": weather_data["main"]["feels_like"],
@@ -33,5 +63,3 @@ class WeatherExtractor:
             "sunset": weather_data["sys"]["sunset"],
             "timezone": weather_data["timezone"],
         }
-        print("EXTRACTED DATA:", extracted_data)
-        return extracted_data
