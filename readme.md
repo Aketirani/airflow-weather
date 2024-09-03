@@ -44,7 +44,7 @@ To set up this project, follow these steps:
 2. **Clone the Repository:**
    - Clone this repository to your local machine:
      ```bash
-     git clone https://github.com/yourusername/airflow-weather.git
+     git clone https://github.com/Aketirani/airflow-weather.git
      cd airflow-weather
      ```
 
