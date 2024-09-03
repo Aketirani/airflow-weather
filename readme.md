@@ -29,7 +29,7 @@ This project showcases the use of Apache Airflow to orchestrate an ETL (Extract,
 |
 ├── docker-compose.yaml         <-- Docker Compose Configuration
 |
-├── README.md                   <-- You Are Here
+├── readme.md                   <-- You Are Here
 |
 ├── requirements.txt            <-- Package Requirements
 ```
