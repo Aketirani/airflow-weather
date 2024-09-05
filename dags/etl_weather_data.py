@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from airflow import DAG
 from airflow.exceptions import AirflowException
 from airflow.operators.python_operator import PythonOperator
@@ -98,16 +100,22 @@ class WeatherETL:
 
 
 default_args = {
+    "owner": "airflow",
     "start_date": days_ago(1),
-    "retries": 1,
+    "retries": 3,
+    "retry_delay": timedelta(minutes=5),
+    "email_on_failure": False,
+    "email_on_retry": False,
 }
 
 dag = DAG(
     "etl_weather_data",
     default_args=default_args,
+    description="ETL DAG to extract, transform, and load weather information with date and time.",
     schedule_interval="@daily",
     catchup=False,
-    description="ETL DAG to extract, transform, and load weather information with date and time.",
+    tags=["weather", "etl"],
+    max_active_runs=1,
 )
 
 weather_etl = WeatherETL(dag)
