@@ -1,4 +1,5 @@
 from airflow import DAG
+from airflow.exceptions import AirflowException
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils.dates import days_ago
 
@@ -58,7 +59,11 @@ class WeatherETL:
         :param kwargs: Context dictionary provided by Airflow
         :return: dict, extracted weather data
         """
-        return self.extractor.extract()
+        try:
+            return self.extractor.extract()
+        except Exception as e:
+            self.log.error(f"Weather data extraction failed: {str(e)}")
+            raise AirflowException(f"Extraction task failed: {str(e)}")
 
     def _transform_weather(self, **kwargs) -> dict:
         """
@@ -67,10 +72,14 @@ class WeatherETL:
         :param kwargs: Context dictionary provided by Airflow
         :return: dict, transformed weather data
         """
-        extracted_data = kwargs["task_instance"].xcom_pull(
-            task_ids="extract_weather_data"
-        )
-        return self.transformer.transform(extracted_data)
+        try:
+            extracted_data = kwargs["task_instance"].xcom_pull(
+                task_ids="extract_weather_data"
+            )
+            return self.transformer.transform(extracted_data)
+        except Exception as e:
+            self.log.error(f"Weather data transformation failed: {str(e)}")
+            raise AirflowException(f"Transformation task failed: {str(e)}")
 
     def _load_weather(self, **kwargs) -> None:
         """
@@ -78,10 +87,14 @@ class WeatherETL:
 
         :param kwargs: Context dictionary provided by Airflow
         """
-        transformed_data = kwargs["task_instance"].xcom_pull(
-            task_ids="transform_weather_data"
-        )
-        self.loader.load(transformed_data)
+        try:
+            transformed_data = kwargs["task_instance"].xcom_pull(
+                task_ids="transform_weather_data"
+            )
+            self.loader.load(transformed_data)
+        except Exception as e:
+            self.log.error(f"Weather data loading failed: {str(e)}")
+            raise AirflowException(f"Loading task failed: {str(e)}")
 
 
 default_args = {
