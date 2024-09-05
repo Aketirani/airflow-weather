@@ -111,7 +111,7 @@ default_args = {
 dag = DAG(
     "etl_weather_data",
     default_args=default_args,
-    description="ETL DAG to extract, transform, and load weather information with date and time.",
+    description="DAG to extract, transform, and load weather information",
     schedule_interval="@daily",
     catchup=False,
     tags=["weather", "etl"],
