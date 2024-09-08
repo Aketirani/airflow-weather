@@ -6,7 +6,7 @@ This project showcases the use of Apache Airflow to orchestrate an ETL (Extract,
 
 ### Structure
 ```
-├── api                         <-- API Folder
+┌── api                         <-- API Folder
 |   └── api_key.py              <-- API Key Configuration
 |
 ├── dags                        <-- DAGs Folder
@@ -31,7 +31,7 @@ This project showcases the use of Apache Airflow to orchestrate an ETL (Extract,
 |
 ├── readme.md                   <-- You Are Here
 |
-├── requirements.txt            <-- Package Requirements
+└── requirements.txt            <-- Package Requirements
 ```
 
 ### Installation
