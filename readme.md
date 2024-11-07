@@ -1,5 +1,11 @@
-# Weather Data Pipeline With Apache Airflow
+# Weather Data Pipeline With Apache Airflow 🌤️
 Apache Airflow is a platform designed to manage and automate complex workflows through programmatic scheduling and monitoring. It empowers users to define workflows as Directed Acyclic Graphs (DAGs), which represent a series of tasks and their dependencies. Each DAG outlines the sequence in which tasks are executed, ensuring that they run in the correct order and adhere to specified dependencies.
+
+### Table of Contents 📖
+- [Project Overview](#project-overview) 🔍
+- [Structure](#structure) 📂
+- [Installation](#installation) 📦
+- [Conclusion](#conclusion) 💡
 
 ### Project Overview
 This project showcases the use of Apache Airflow to orchestrate an ETL (Extract, Transform, Load) pipeline focused on weather data. It provides a practical example of how Airflow can be employed to automate the retrieval of weather information from the OpenWeatherMap API, process and transform the data, and present it in a structured format.
