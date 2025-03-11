@@ -1,6 +1,8 @@
 # Weather Data Pipeline With Apache Airflow 🌤️
 Apache Airflow is a platform designed to manage and automate complex workflows through programmatic scheduling and monitoring. It empowers users to define workflows as Directed Acyclic Graphs (DAGs), which represent a series of tasks and their dependencies. Each DAG outlines the sequence in which tasks are executed, ensuring that they run in the correct order and adhere to specified dependencies.
 
+![ANC Gif](images/weather.gif)
+
 ### Table of Contents 📖
 - [Project Overview](#project-overview) 🔍
 - [Structure](#structure) 📂
